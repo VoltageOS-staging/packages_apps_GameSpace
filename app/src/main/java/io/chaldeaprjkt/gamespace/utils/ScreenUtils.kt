@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2021 Chaldeaprjkt
- *               2022 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -93,8 +92,8 @@ class ScreenUtils @Inject constructor(private val context: Context) {
         val handler = Handler(Looper.getMainLooper())
         ScreenshotHelper(context).takeScreenshot(
             WindowManager.TAKE_SCREENSHOT_FULLSCREEN,
-            WindowManager.ScreenshotSource.SCREENSHOT_GLOBAL_ACTIONS, handler, 1000, null
-        )
+            WindowManager.ScreenshotSource.SCREENSHOT_GLOBAL_ACTIONS, handler
+        ) { handler.post { onComplete?.invoke(it) } }
     }
 
     var stayAwake = false
